@@ -39,7 +39,7 @@ def lambda_handler(event: dict, context):
         try:
             result = generate_feedback_message(message)
             obj = s3.Object(feedback_upload_bucket, str(uuid.uuid4()))
-            obj.put(Body=json.dumps(message))
+            obj.put(Body=json.dumps(message, ensure_ascii=False))
         except Exception as e:
             print(e)
             exit(1)
